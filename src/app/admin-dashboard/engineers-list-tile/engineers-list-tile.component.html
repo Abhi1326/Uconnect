@@ -1,0 +1,43 @@
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2><i class="fa fa-align-left"></i>
+        Engineers List
+      </h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li class="pull-right"><a class="collapse-link "><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <table class="table table-striped projects color_text">
+        <thead>
+        <tr class="color_text">
+          <th style="width: 2%">S.No</th>
+          <th class="color_text" width="45%">Engineer_Name</th>
+          <th class="color_text">Current No Of Projects</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="color_text" *ngFor="let list of eng_list.project_wise_supporter;let k=index">
+          <td>{{k+1}}</td>
+          <td><a class="anchor" (click)="open_sprofile(list.id)">
+                  <span class="col-md-2 col-xs-3 text-center ">
+                  <img onerror="this.src='../../assets/images/Blank_woman_placeholder.svg_.png'" [src]="host+list.image.small" alt="asdasd" class="list_img" >
+                  </span>
+            <span style="vertical-align: middle">{{list.username}}</span>
+          </a>
+          </td>
+          <td>{{list.projects}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  <!-- end of accordion -->
+
+
+</div>

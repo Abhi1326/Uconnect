@@ -1,0 +1,245 @@
+
+<div class="right_col profile_abc" role="main">
+  <div class="">
+    <div class="">
+      <div class="page-title">
+      </div>
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2 class="color_text">{{supporterdata.first_name}} {{supporterdata.last_name}}<small class="color_text">Activity report</small></h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                <div class="profile_img">
+                  <div id="crop-avatar" (mouseenter)="callEdit()" (mouseleave)="callEdit()" (click)="OpenCropper()">
+                    <img class="img-responsive avatar-view" [src]="supporterdata.image.full_size"
+                         onerror="this.src='../../assets/images/Blank_woman_placeholder.svg_.png'"
+                         title="Change the avatar">
+                    <span class="edit" *ngIf="_edit"><strong>EDIT PICTURE</strong></span>
+                  </div>
+                </div>
+                <h3 class="color_text"><strong>{{supporterdata.first_name}} {{supporterdata.last_name}}</strong></h3>
+                <div>
+                  <ul class="color_text" class="list-unstyled user_data">
+                    <li class="m-top-xs color_text">
+                      <i class="fa fa-user user-profile-icon">Employee Id</i>
+                      <a  target="_blank">{{supporterdata.empid}}</a>
+                    </li>
+                    <li class="color_text" *ngIf="showuser"><i class="fa fa-map-marker user-profile-icon"></i>
+                      <strong>Company:</strong>Consultadd<br><strong>Address:</strong>Pentagon P5,Magerpatte city,Pune
+                    </li>
+                    <li class="color_text" *ngIf="!showuser"><i class="fa fa-map-marker user-profile-icon"></i>
+                      <strong>Company:</strong>{{supporterdata.company_name}}
+                    </li>
+                    <li class="m-top-xs color_text">
+                      <i class="fa fa-user user-profile-icon">Username:</i>
+                      <a  target="_blank">{{supporterdata.username}}</a>
+                    </li>
+                    <li class="color_text" *ngIf="!showuser">
+                      <i class="fa fa-user">Supporter:</i>
+                      <a  target="_blank">{{supporterdata._supporter.username}}</a>
+                    </li>
+                    <li class="m-top-xs color_text">
+                      <i class="fa fa-envelope">Email:</i>
+                      <a  target="_blank">{{supporterdata.email}}</a>
+                    </li>
+                    <li class="m-top-xs color_text">
+                      <i class="fa ">Experience (In years):</i>
+                      <a  target="_blank">{{supporterdata.experience}}</a>
+                    </li>
+                    <li class="m-top-xs color_text">
+                      <i class="fa  ">Gender</i>
+                      <a  target="_blank">{{supporterdata.gender}}</a>
+                    </li>
+                    <li class="m-top-xs color_text">
+                      <i class="fa fa-mobile ">Mobile:</i>
+                      <a target="_blank">{{supporterdata.mobile_no}}</a>
+                    </li>
+                    <li class="m-top-xs color_text">
+                      <i class="fa fa-mobile " *ngIf="!showuser">Resume:</i>
+                      <a [href]="supporterdata.resume" target="_blank">{{resume_name}}</a>
+                    </li>
+                    <li class="m-top-xs color_text">
+                      <i class="fa fa-skype ">Skype:</i>
+                      <a  target="_blank">{{supporterdata.skype_username}}</a>
+                    </li>
+
+                   <li class="m-top-xs color_text" *ngIf="showuser">
+                      <i class="fa fa-user user-profile-icon" *ngIf="showuser">Current Consultant:</i>
+                      <a class="anchor" *ngIf="supporterdata.consultant.length>0" (click)="openConsultantprofile(supporterdata.consultant[0].id)" target="_blank">{{supporterdata.consultant[0].username}}</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div *ngIf="showuser">
+                  <!-- start skills -->
+                  <h4 class="color_text">Skills:</h4>
+                  <ul class="color_text" class="list-unstyled user_data">
+                    <li *ngFor="let skill of supporterdata.skillset">
+                      <p class="color_text">{{skill.technology_name}}</p>
+                      <div class="progress progress_sm">
+                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"
+                             aria-valuenow="49" [style.width.%]="skill.pointer"></div>
+                      </div>
+                    </li>
+
+                  </ul>
+
+                  <!-- end of skills -->
+                </div>
+                <br>
+
+                <button type="button" *ngIf="permission" class="btn btn-primary" (click)="profile_edit()">Edit profile</button>
+
+                <div id="editModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <app-profile-modal [userdata]="supporterdata" [role]="supporterdata.role" (updatedData)="update($event)" ></app-profile-modal>
+                    </div>
+                  </div>
+                </div>
+                <br>
+              </div>
+
+
+              <div id="editImage" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <app-img-cropper (updatedData)="update($event)" [userdata]="supporterdata"> </app-img-cropper>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="profile_title">
+                  <div class="col-md-6">
+                    <h2 class="color_text">User Activity Report</h2>
+                  </div>
+                  <!--<div class="col-md-6">-->
+                  <!--<div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">-->
+                  <!--<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>-->
+                  <!--<span class="color_text">October 31, 2016 - November 29, 2016</span> <b class="caret"></b>-->
+                  <!--</div>-->
+                  <!--</div>-->
+                </div>
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                  <ul id="myTab" class="nav nav-tabs bar_tabs color_text" role="tablist">
+                    <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Recent Activity</a>
+                    </li>
+                    <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Projects Worked on</a>
+                    </li>
+                    <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Project Description</a>
+                    </li>
+
+                  </ul>
+                  <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                      <!-- start recent activity -->
+                      <ul class="messages">
+                        <li *ngFor="let project of projectlist ;let l =index" >
+                          <div class="x_panel">
+                            <div class="x_title">
+                              <h2 class="color_text"> <strong>{{project.title|camelCase}}</strong><small>Comments</small></h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                <li class="pull-right"><a id="collapse-link{{l}}" class="collapse-link" (click)="hide_content($event)"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                              </ul>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div *ngIf="!(project.comment.length==0)" class="x_content">
+                              <div *ngFor="let data of project.comment " class="project-comment">
+                                <img  class="avatar" src="{{data._supporter.image}}">
+                                <div class="message_date">
+                                  <h5 class="date text-info">{{data.comment_time|timeAgo}}</h5>
+                                  <p class="month">{{data.comment_time|date:"mediumDate"}}</p>
+                                </div>
+                                <div class="message_wrapper">
+                                  <h4 class="heading color_text" (click)="open_profile_supp(data._supporter.id)">{{data._supporter.username}}</h4>
+                                  <blockquote class="message color_text">{{data.text}}</blockquote>
+                                  <br>
+                                </div>
+                              </div>
+                            </div>
+                            <div *ngIf="(project.comment.length==0)" class="x_content">
+                              <div>
+                                <h4 style="text-align: center">No Comments</h4>
+                              </div>
+
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      <!-- end recent activity -->
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade color_text" id="tab_content2" aria-labelledby="profile-tab">
+                      <div class="x_panel">
+                      <div class="x_title">
+                        <span class="pull-left" style="font-size: 16px">Project List</span>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <li class="pull-right"><a id="collapse-link" class="collapse-link" (click)="hide_content($event)"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                        <div id='x_content' class="x_content">
+                      <!-- start user projects -->
+                      <table class="data table table-striped no-margin">
+                        <thead>
+                        <tr>
+                          <th>#</th>
+                          <th >Project_Name</th>
+                          <th>Consultant_Name</th>
+                          <th>Client_Name</th>
+                          <th>Start_Date</th>
+                          <th class="hidden-phone">Technology</th>
+                          <th>status</th>
+                          <th>Consultant_Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of projectlist;let i=index" >
+                          <td>{{i+1}}</td>
+                          <td><a>{{data.title}}</a></td>
+                          <td>{{data.consultant.name}}</td>
+                          <td>{{data.consultant.client_name}}</td>
+                          <td>{{data.assigned_date}}</td>
+                          <td class="hidden-phone">{{data.technology.technology}}</td>
+                          <td class="vertical-align-mid">
+                            {{data.status}}
+                          </td>
+                          <td class="vertical-align-mid">
+                            {{data.consultant.consultant_status}}
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                          </div>
+                      <button class="btn btn-primary pull-right" (click)="exportToExcel()">ExportToExcel</button>
+                      </div>
+                    </div>
+                    <div  role="tabpanel" class="tab-pane fade color_text" id="tab_content3" aria-labelledby="profile-tab">
+                      <div *ngIf="projectlist.length>0">
+                        <h1><strong>{{projectlist[0].title}}</strong></h1>
+                        <p>{{projectlist[0].description}}</p>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

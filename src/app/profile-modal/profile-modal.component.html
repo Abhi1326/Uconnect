@@ -1,0 +1,194 @@
+
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+  </button>
+  <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+</div>
+<form class="form-horizontal form-label-left" novalidate="" [formGroup]="userEditForm"
+      (ngSubmit)="updateprofile(userEditForm.value)">
+<div class="modal-body">
+
+
+      <span class="section">{{userdata.username}} Info</span>
+    <span *ngIf="iserror">{{errMessage|json}}</span>
+
+      <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">First Name <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" formControlName="user_firstname"
+                 data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
+          <app-controlmessages [control]="userEditForm.controls.user_firstname"></app-controlmessages>
+        </div>
+      </div>
+      <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Last Name <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input id="lname" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" data-validate-words="2"
+                 name="name" placeholder="both name(s) e.g Jon Doe" formControlName="user_lastname" required="required" type="text">
+          <app-controlmessages [control]="userEditForm.controls.user_lastname"></app-controlmessages>
+        </div>
+      </div>
+      <div class="item form-group" *ngIf="isConsultant">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Resume<span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input type="file" ng2FileSelect [uploader]="uploader" (click)="uploadfile()"/>
+          <!--<app-controlmessages [control]="userEditForm.controls.user_lastname"></app-controlmessages>-->
+        </div>
+      </div>
+      <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input type="email" id="email" name="email" required="required" formControlName="user_email" class="form-control col-md-7 col-xs-12">
+          <app-controlmessages [control]="userEditForm.controls.user_email"></app-controlmessages>
+        </div>
+      </div>
+      <div class="item form-group" *ngIf="!isConsultant">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Employee Id <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12" >
+          <input type="text" id="uniq"  required="required" class="form-control col-md-7 col-xs-12"
+                 formControlName="user_employeeid">
+          <app-controlmessages [control]="userEditForm.controls.user_employeeid"></app-controlmessages>
+        </div>
+      </div>
+    <div class="item form-group" *ngIf="isConsultant">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" >Client Name <span class="required">*</span>
+      </label>
+      <div class="col-md-6 col-sm-6 col-xs-12" >
+        <input type="text" id="company_nm"  required="required" class="form-control col-md-7 col-xs-12"
+               formControlName="user_clientName">
+        <app-controlmessages [control]="userEditForm.controls.user_clientName"></app-controlmessages>
+      </div>
+    </div>
+    <div class="item form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div id="gender" class="btn-group" data-toggle="buttons" >
+          <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" (click)="gender('male')">
+            <input type="radio" name="user_gender" [value]="male" data-parsley-multiple="gender" data-parsley-id="12"
+            > &nbsp; Male &nbsp;
+          </label>
+          <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" (click)="gender('female')">
+            <input type="radio" name="user_gender" [value]="female" data-parsley-multiple="gender"
+            > Female
+          </label>
+          <app-controlmessages [control]="userEditForm.controls.user_gender"></app-controlmessages>
+        </div>
+      </div>
+    </div>
+    <div class="item form-group" *ngIf="isConsultant">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">Status <span class="required">*</span></label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <select class="form-control"  formControlName="user_status" required>
+          <option value="active">Active</option>
+          <option value="less_active">Less Active</option>
+          <option value="independent">Independent</option>
+        </select>
+        <app-controlmessages [control]="userEditForm.controls.user_gender"></app-controlmessages>
+      </div>
+    </div>
+      <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Phone Number <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input type="text" id="number" name="number" required="required" data-validate-minmax="10,100"
+                 formControlName="user_mobile"
+                 class="form-control col-md-7 col-xs-12">
+          <app-controlmessages [control]="userEditForm.controls.user_mobile"></app-controlmessages>
+        </div>
+      </div>
+      <div class="item form-group">
+        <label  class="control-label col-md-3">Skype Id</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input id="skype" type="text"  data-validate-length="6,8" class="form-control col-md-7 col-xs-12"
+                 formControlName="user_skypeid">
+          <app-controlmessages [control]="userEditForm.controls.user_skypeid"></app-controlmessages>
+        </div>
+      </div>
+  <div class="item form-group" *ngIf="isConsultant">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Supporter <span class="required">*</span></label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <select class="form-control"  formControlName="user_supporter" required>
+        <option *ngFor="let obj of supporter |async" value={{obj.id}}>{{obj.username}}</option>
+      </select>
+    </div>
+  </div>
+      <div *ngIf="!isConsultant" class="item form-group" formArrayName="user_skillset">
+        <span class="section" style="font-size: large">Skills <button class="btn btn-default" type="button" (click)="addskill(userEditForm.controls.user_skillset.controls)">Add skills</button></span>
+
+        <div *ngFor="let skillset of userEditForm.controls.user_skillset.controls; let i=index">
+          <!-- skillset header, show remove button when more than one skillset available -->
+
+            <span class="section" style="font-size: small;border-bottom: 0">Skills{{i+1}}
+              <button  (click)="removeskill(i)" type="button"><i  class="fa fa-minus"></i></button></span>
+
+
+          <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+          <div [formGroupName]="i">
+            <!--technology-->
+            <div class="item form-group">
+              <label  class="control-label col-md-3">Technology</label>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <select id="technology"  class="form-control col-md-7 col-xs-12"
+                       formControlName="technology">
+                  <option *ngFor="let tech of technology" value="{{tech.id}}">{{tech.technology}}</option>
+                </select>
+              </div>
+              <button type="button" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-plus-circle"></i></button>
+            </div>
+            <!--pointer-->
+            <div class="item form-group">
+              <label  class="control-label col-md-3">Pointer</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <select id="pointer" formControlName="pointer">
+                  <option *ngFor="let k of [1,2,3,4,5,6,7,8,9,10]" value="{{k*10}}">{{k}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default close" data-dismiss="modal">cancel</button>
+  <button  *ngIf="!isConsultant" id ="update" type="submit" class="btn btn-primary" [disabled]="!userEditForm.valid">Submit</button>
+  <button *ngIf="isConsultant" id="update_consultant" type="button" class="btn btn-primary" (click)="update_consultant(userEditForm.value)">Update</button>
+</div>
+</form>
+
+<!--------------------------------------------------- Technology Modal------------------------------------------------------------>
+<div id="Mymodal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content small-modal">
+
+      <div class="modal-header">
+        <button type="button" class="close" (click)="closeModal()" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel2">Add Technology</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal form-label-left">
+          <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="technology">Technology<span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input id="tech" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" [(ngModel)]="technology_item"
+                     data-validate-words="2" name="technology" placeholder="technology" required type="text">
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closeModal()">Close</button>
+        <button type="button" (click)="add_technology()" [disabled]='technology_item==null' class="btn btn-primary">Add</button>
+      </div>
+
+    </div>
+  </div>
+</div>

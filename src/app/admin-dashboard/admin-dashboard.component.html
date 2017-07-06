@@ -1,0 +1,23 @@
+<div class="right_col" role="main">
+  <div class="">
+    <app-top-tiles [alldata]="alldata"></app-top-tiles>
+    <div class="row">
+
+        <app-project-list-tile [active_project]="active_project"></app-project-list-tile>
+
+        <app-tech-chart [tech_data]="alldata.tech_data"></app-tech-chart>
+
+    </div>
+    <div class="row">
+
+        <app-todo-list></app-todo-list>
+        <app-engineers-list-tile [eng_list]="eng_list"></app-engineers-list-tile>
+
+
+    </div>
+  </div>
+
+
+</div>
+
+

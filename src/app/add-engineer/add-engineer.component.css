@@ -1,0 +1,16 @@
+.form-horizontal .control-label {
+  padding-top: 8px;
+  color: black;
+  opacity: 0.4;
+}
+
+.message{
+  color:red;
+  font-size: large;
+  text-align: center;
+  margin-left: 28%;
+  vertical-align: super;
+}
+ul {
+  list-style-type: none;
+}

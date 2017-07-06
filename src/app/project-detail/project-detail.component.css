@@ -1,0 +1,23 @@
+
+ul.messages li img.avatar, img.avatar[alt] {
+  font-size: 21px;
+  text-align: center;
+  padding: 0px;
+  border: 0px;
+
+}
+
+textarea { resize: vertical; }
+
+.modal-body {
+  position: relative;
+
+  margin-bottom: 36px;
+}
+.page-title .title_left {
+  width: 100%;
+  float: left;
+  display: block;
+}
+
+

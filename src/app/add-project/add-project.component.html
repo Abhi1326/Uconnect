@@ -1,0 +1,172 @@
+
+<div class="right_col" role="main">
+  <div class="">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Project</h3>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+
+              <form class="form-horizontal form-label-left" novalidate="" [formGroup]="projectForm"
+                    (ngSubmit)="addProject(projectForm.value)">
+
+                <span class="section">Project Info</span>
+                <span class="message" *ngIf="iserror">
+                  <ul>
+                    <li *ngFor="let k of issuccess">
+                      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{k}}</li>
+                  </ul>
+                </span>
+                <div class="item form-group" >
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Consultant <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select id="sel"class="form-control"  formControlName="consultant" required>
+                      <option *ngFor="let obj of consultantdata" value={{obj.id}}>{{obj.username}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Technology <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control" (change)="editForm()"  formControlName="technology" required>
+                      <option *ngFor="let tech of _technology " [value]=tech.id>{{tech.technology}}</option>
+                    </select>
+                  </div>
+                  <button type="button" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-plus-circle"></i></button>
+                </div>
+
+                <div class="item form-group">
+
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Title <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" disabled formControlName="title"
+                           data-validate-words="2" name="title" placeholder="both name(s) e.g Admin Panel" required="required" type="text">
+                    <app-controlmessages [control]="projectForm.controls.title"></app-controlmessages>
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" >Description <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <!--<input id="lname" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" data-validate-words="2"-->
+                           <!--name="description" placeholder="description" formControlName="description"-->
+                           <!--required="required" type="textarea">-->
+                    <textarea id="message" required="required" class="form-control" name="message" formControlName="description"
+                              data-parsley-trigger="keyup" data-parsley-minlength="1" data-parsley-maxlength="100"
+                              data-parsley-minlength-message="Come on! You need to enter at least a 1 caracters long comment.."
+                              data-parsley-validation-threshold="10" ></textarea>
+                    <app-controlmessages [control]="projectForm.controls.description"></app-controlmessages>
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="assigned_date">Assigned_date <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <!--<input type="date" id="assigned_date" name="assigned_date" required="required" formControlName="assigned_date"-->
+                           <!--class="form-control col-md-7 col-xs-12">-->
+                    <input
+                      class="form-control col-md-7 col-xs-12"
+                      id="assigned_date"
+                      required
+                      formControlName="assigned_date"
+                      ng2-datetime-picker
+                      date-only="true"/>
+                    <app-controlmessages [control]="projectForm.controls.assigned_date"></app-controlmessages>
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" >Join_date <span class="required"></span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <!--<input type="date" id="completion_date"  required="required" class="form-control col-md-7 col-xs-12"-->
+                           <!--formControlName="completion_date">-->
+                    <input
+                      class="form-control col-md-7 col-xs-12"
+                      formControlName="join_date"
+                      ng2-datetime-picker
+                      date-only="true"/>
+                    <app-controlmessages [control]="projectForm.controls.join_date"></app-controlmessages>
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Technology <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control"  formControlName="technology" required>
+                      <option *ngFor="let tech of _technology " [value]=tech.id>{{tech.technology}}</option>
+                    </select>
+                  </div>
+                  <button type="button" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-plus-circle"></i></button>
+                </div>
+
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Status <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control"  formControlName="status" required>
+                      <option value="going_on">Going On</option>
+                      <option value="project_completed">Project Completed</option>
+                      <option value="contract_completed">Contract Completed</option>
+                      <option value="contract_extended">Contract Extended</option>
+                      <option value="resigned">Resigned</option>
+                      <option value="fired">Fired</option>
+                    </select>
+                  </div>
+                </div>
+
+
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-md-offset-3">
+                    <button type="button" (click)="cancelproject()" class="btn btn-primary">Cancel</button>
+                    <button id="send" type="submit" [disabled]="!projectForm.valid" class="btn btn-success">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--------------------------------------------------- Technology Modal------------------------------------------------------------>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel2">Add Technology</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal form-label-left">
+          <div *ngIf="isTechnologyError" class="message_small"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{errorMessage}}</div>
+          <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="technology">Technology<span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input id="technology" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" [(ngModel)]="item_technology"
+                     data-validate-words="2" name="technology" placeholder="technology" required type="text">
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" (click)="add_technology()" [disabled]='item_technology==null' class="btn btn-primary">Add</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

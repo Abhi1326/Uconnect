@@ -1,0 +1,7 @@
+.x_panel{
+  padding: 0px;
+}
+.x_content{
+  height: 320px;
+  overflow-y: auto;
+}

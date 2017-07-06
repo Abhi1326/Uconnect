@@ -1,0 +1,53 @@
+.right_col{
+  color: rgba(0, 0, 0, 0.7);
+}
+td .color_text {
+  font-size: 13px;
+}
+.table>thead>tr>th{
+  vertical-align: middle;
+  color:rgba(0, 0, 0, 0.9)
+}
+.table>tbody>tr>td{
+
+  vertical-align: middle;
+
+}
+.table>tbody>tr>td>.anchor{
+  color:#003d63;
+  font-size: 15px;
+
+}
+
+.no_found{
+  text-align: center;
+  font-size: 52px;
+  font-family: 'Lemonada', cursive;
+  overflow: hidden;
+}
+
+.no_smile{
+  margin: auto;
+  display: table;
+  -ms-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  transform: rotate(90deg);
+  font-size: 142px;
+}
+button.addForm{
+  color: #fff;
+  text-shadow: -2px 2px #2e7cbb;
+  background-color: rgb(107, 147, 187);
+  box-shadow: inset 0 0 0 1px #27496d;
+  border: none;
+  border-radius: 18px;
+}
+td a{
+
+  cursor: pointer;
+
+
+}
+.btn-xs{
+  font-size: 10px;
+}

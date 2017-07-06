@@ -1,0 +1,19 @@
+.no_smile{
+  margin: auto;
+  display: table;
+  -ms-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  transform: rotate(90deg);
+  font-size: 100px;
+}
+.no_found{
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Lemonada', cursive;
+  overflow: hidden;
+}
+
+.x_content{
+  height: 320px;
+  overflow-y: auto;
+}

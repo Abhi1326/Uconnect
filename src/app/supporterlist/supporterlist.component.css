@@ -1,0 +1,90 @@
+.list-unstyled li{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 184px;
+}
+button.addForm{
+  color: #fff;
+  text-shadow: -2px 2px #2e7cbb;
+  background-color: rgb(107, 147, 187);
+  box-shadow: inset 0 0 0 1px #27496d;
+  border: none;
+  border-radius: 18px;
+}
+
+p{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+.profile_details .profile_view .right {
+  margin-top: 0px;
+  padding: 10px;
+  height: 125px;
+  width: 125px;
+}
+.profile_details .profile_view .img-circle {
+  border: 1px solid #E6E9ED;
+  padding: 2px;
+  height: 100%;
+  width: 100%;
+  max-height: 125px;
+  /* min-height: 125px; */
+  max-width: 125px;
+}
+.profile_details{
+  float:left;
+  width: 322px;
+  margin-right: 10px;
+  padding: 0px;
+
+
+}
+
+.profile_details-width2 { width: 400px; }
+@media (min-width:360px)and (max-width: 600px) {
+  /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+  .profile_details {
+    float: left;
+    width: 100%;
+    margin-right: 10px;
+    padding: 0px;
+
+  }
+}
+  @media (min-width:300px) and (max-width: 360px){
+    .profile_details {
+      float: left;
+      width: 82%;
+      margin-right: 10px;
+      padding: 0px;
+
+    }
+    .right_col{
+      width:100%
+    }
+    .well{
+      width:100%;
+    }
+  }
+
+.no_found{
+  text-align: center;
+  font-size: 52px;
+  font-family: 'Lemonada', cursive;
+  overflow: hidden;
+}
+
+.no_smile{
+  margin: auto;
+  display: table;
+  -ms-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  transform: rotate(90deg);
+  font-size: 142px;
+}
+
+.highlight{
+  background-color: #1ABB9C;
+}

@@ -1,0 +1,11 @@
+.x_panel{
+  padding: 0;
+}
+
+.userprofilehover{
+  cursor: pointer;
+}
+.x_content{
+  height: 320px;
+  overflow-y: auto;
+}

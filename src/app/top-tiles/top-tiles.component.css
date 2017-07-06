@@ -1,0 +1,22 @@
+
+.tile-stats .icon {
+  width: 20px;
+  height: 20px;
+  color:#BAB8B8;
+  position: absolute;
+  right: 53px;
+  top: 22px;
+  z-index: 6 !important;
+}
+
+.tile-stats .icon i:hover {
+  background: rgba(255,255,255,1);
+  color: #64bb5d;
+}
+
+.tile-stats{
+  box-shadow: 2px 2px 2px #797373;
+}
+.anchor {
+  cursor: pointer;
+}

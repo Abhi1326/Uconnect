@@ -1,0 +1,51 @@
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2><i class="fa fa-align-left"></i> Current Projects
+      </h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+
+      <!-- start accordion -->
+      <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel" *ngFor="let project of active_project.active_projects;let i =index">
+          <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion"
+             [href]="'#collapseOne'+i" aria-expanded="true" aria-controls="collapseOne">
+            <h4 class="panel-title">{{project.title}}</h4>
+          </a>
+          <div id="collapseOne{{i}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body ">
+              <a class="anchor" (click)="open_sprofile(project.consultant.supporter.id)">
+                <div class="col-md-6 col-xs-3 text-center ">
+                  <h6>Engineer -{{project.consultant.supporter.username}}</h6>
+                  <img onerror="this.src='../../assets/images/Blank_woman_placeholder.svg_.png'" [src]="host+project.consultant.supporter.image.medium" alt="asdasd" class="img-circle">
+                </div>
+              </a>
+              <a class="anchor" (click)="open_cprofile(project.consultant.id)">
+                <div class="col-md-6 col-xs-3 text-center ">
+                  <h6>Consultant - {{project.consultant.username}}</h6>
+                  <img onerror="this.src='../../assets/images/Blank_woman_placeholder.svg_.png'"   [src]="host+project.consultant.image.medium" alt="asdasd" class="img-circle ">
+                </div>
+              </a>
+              <a class="anchor" (click)="open_detail_project(project.id)">
+                <div class="col-md-12">
+                  <h4>Project Description</h4>
+                  <p>sjnfckjba aksbnfdkabsndk asfkasbnfkb qasfkabsfkabskbasf sjnfckjba aksbnfdkabsndk asfkasbnfkb qasfkabsfkabskbasf sjnfckjba aksbnfdkabsndk asfkasbnfkb qasfkabsfkabskbasf</p>
+                </div>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of accordion -->
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="x_panel">
+  <div class="x_title">
+    <h2>{{supporter_details.supporter_id}} <small>assigned on {{supporter_details.supporter_change_time|date:"mediumDate"}}</small></h2>
+
+    <div class="clearfix"></div>
+  </div>
+  <div  class="x_content" style="display: block;">
+
+    <div class="">
+      <div *ngIf="!isEmpty" style="display: block">
+        <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+      </div>
+      <div *ngIf="isEmpty">
+        <p class="no_found">Analysis Not Found</p>
+        <span class="no_smile">
+                    :(
+                  </span>
+      </div>
+    </div>
+  </div>
+  </div>
+

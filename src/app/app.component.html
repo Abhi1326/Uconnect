@@ -1,0 +1,138 @@
+  <div *ngIf="!hide" class="col-md-3 left_col">
+  <div class="left_col scroll-view fix">
+    <div class="navbar nav_title" style="border: 0;">
+      <a class="site_title"><i class="fa fa-qq"></i> <span>TIXADD!</span></a>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <!-- menu profile quick info -->
+    <div class="profile">
+      <div class="profile_pic">
+        <img  alt="..." [src]="user.image.small" onerror="this.src='../../assets/images/Blank_woman_placeholder.svg_.png'" class="img-circle profile_img">
+      </div>
+      <div class="profile_info">
+        <span>Welcome,</span>
+        <h2>{{this.user.username}}</h2>
+      </div>
+    </div>
+    <!-- /menu profile quick info -->
+
+    <br />
+    <br/>
+    <br/>
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+        <ul class="nav side-menu">
+          <li class="select_hover" (click)="home()"><a><i class="fa fa-home"></i> Home</a>
+          </li>
+          <li class="select_hover" (click)="showlist()"><a><i class="fa fa-edit"></i> Widgets <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu" [ngStyle]="{'display': display}">
+              <li class="select_hover" (click)="op('todolist')"><a >To Do List</a></li>
+              <!--<li class="select_hover" (click)="op('notification')"><a >Recent Activities</a></li>-->
+              <!--<li class="select_hover" (click)="op('calender')"><a >Today's Calender</a></li>-->
+              <!--<li class="select_hover" (click)="op('comments')"><a >Comments</a></li>-->
+              <li class="select_hover" (click)="op('tech_charts')"><a >Technology Chart</a></li>
+              <!--<li class="select_hover" (click)="op('notification')"><a >Notification</a></li>-->
+            </ul>
+          </li>
+          <li class="select_hover" class="select_hover" (click)="open_list()"><a><i class="fa fa-desktop"></i> List <span class="fa fa-chevron-down"></span></a>
+            <ul [ngStyle]="{'display': display2}" class="nav child_menu">
+              <li class="select_hover" (click)="list('supporterlist')"><a>Engineer List</a></li>
+              <li class="select_hover" (click)="list('consultantlist')"><a >Consultant List</a></li>
+              <li class="select_hover" (click)="list('projectlist')"><a >Project List</a></li>
+            </ul>
+          </li>
+          <li class="select_hover" (click)="open_add()"><a><i class="fa fa-table"></i> Add <span class="fa fa-chevron-down"></span></a>
+            <ul [ngStyle]="{'display': display3}" class="nav child_menu">
+              <li class="select_hover" *ngIf="isSuperuser" (click)="add('supporter')"><a >Add Engineer</a></li>
+              <li class="select_hover" *ngIf="isSuperuser" (click)="add('consultant')"><a >Add Consultants</a></li>
+              <li class="select_hover" (click)="add('project')"><a >Adding Projects</a></li>
+            </ul>
+          </li>
+          <li class="select_hover" (click)="userProfile()"><a><i class="fa fa-bar-chart-o"></i>Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /sidebar menu -->
+
+    <!-- /menu footer buttons -->
+    <div class="sidebar-footer hidden-small">
+      <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+        <span (click)="switchBodyColor()" class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+      </a>
+      <a data-toggle="tooltip" data-placement="top" title="Lock">
+        <span (click)="switchBodyLock()" class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+      </a>
+      <a data-toggle="tooltip" (click)="logout()" data-placement="top" title="Logout">
+        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+        </a>
+        <a  data-placement="top" >
+          <span class="glyphicon " aria-hidden="true"></span>
+      </a>
+    </div>
+    <!-- /menu footer buttons -->
+  </div>
+</div>
+<div *ngIf="!hide" class="top_nav">
+  <div class="nav_menu">
+    <nav>
+      <div class="nav toggle" (click)="switchBodyColor()">
+        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="">
+          <a  class="userprofilehover user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <img  [src]='user.image.small' onerror="this.src='../../assets/images/Blank_woman_placeholder.svg_.png'">{{user.username}}
+            <span class=" fa fa-angle-down"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-usermenu pull-right">
+            <li (click)="userProfile()"><a> Profile</a></li>
+            <li (click)="logout()"><a><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+          </ul>
+        </li>
+
+        <li role="presentation" class="dropdown">
+          <a (click)="change()" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-comment-o fa-4x" (click)="change()" ></i>
+            <span class="badge bg-green">{{count}}</span>
+          </a>
+          <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu" >
+            <li *ngIf="noNotify"><a><span class="less">No New Notification</span></a></li>
+            <li *ngFor="let notify of total_notification;let i = index ">
+              <a (click)="nextpage(notify)">
+                <span class="image"><i class="fa fa-comment"></i></span>
+                <span>
+                        <span>{{notify.time|amCalendar}}</span>
+                        <span class="time">{{notify.time|amTimeAgo}}</span>
+                      </span>
+                <span class="message">
+                     <strong>{{notify.text}}</strong>
+                      </span>
+                <div *ngIf="notify.type=='registered'">
+                  <button class="btn-register" (click)="confirmRequest(notify,i)">Confirm</button>
+                  <button class="btn-register" (click)="denyRequest(notify,i)">Deny</button>
+                </div>
+              </a>
+            </li>
+            <li><a (click)="notifyPage()"><span class="more"><u>View More</u></span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="popup_cont" *ngIf="lockBody">
+  <div class="col-md-8 col-md-offset-2 popup_holder">
+    <div class="popup_header">
+      <p class="pull-left"><span (click)="unlock()" id="generictitle" class="titlestyle">Locked</span></p>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+
+

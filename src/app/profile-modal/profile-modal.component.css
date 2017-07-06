@@ -1,0 +1,32 @@
+.form-horizontal .control-label {
+  padding-top: 8px;
+
+  margin-right: 19px;
+}
+.small-modal{
+  margin-top: 46%;
+}
+.modal1 {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+.modal-open .modal1 {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.modal-body {
+  position: relative;
+  padding: 12px 0 0 0;
+  margin-bottom: 3px;
+}
+span.section{
+  padding-left: 12px;
+}

@@ -1,0 +1,120 @@
+<div class="login_color">
+  <a class="hiddenanchor" id="signup"></a>
+  <a class="hiddenanchor" id="signin"></a>
+
+  <div class="login_wrapper">
+    <div class="animate form login_form" *ngIf="!isforgot">
+      <section class="login_content">
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+          <h1>Login Form</h1>
+
+            <h5 *ngIf="ismessage"><i class="fa fa-check" aria-hidden="true"></i>
+              {{message}}</h5>
+
+          <div>
+            <input type="text" class="form-control" placeholder="Username" formControlName="_user" required="" />
+            <app-controlmessages [control]="loginForm.controls._user"></app-controlmessages>
+          </div>
+          <div>
+            <input type="password" class="form-control" placeholder="Password" formControlName="_password" required="" />
+            <app-controlmessages [control]="loginForm.controls._password"></app-controlmessages>
+          </div>
+          <div>
+            <button class="btn btn-default submit" [disabled]="!loginForm.valid">Log in</button>
+            <a class="reset_pass" (click)="forgot()">forgot your password</a>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="separator">
+            <p class="change_link">New to site?
+              <a href="#signup" class="to_register" (click)="clear()"> Create Account </a>
+            </p>
+
+            <div class="clearfix"></div>
+            <br />
+
+            <div>
+              <h1><i class="fa fa-paw"></i> TIXADD</h1>
+              <p>©2016 All Rights Reserved. TIXADD is a Bootstrap 3 template. Privacy and Terms</p>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div id="register" class="animate form registration_form" *ngIf="!isforgot">
+      <section class="login_content">
+        <form [formGroup]="signupForm" (ngSubmit)="signup(signupForm.value)">
+          <h1>Create Account</h1>
+            <h5 *ngIf="ismessage"><i class="fa fa-check"></i>
+              {{message}}</h5>
+          <div>
+            <input type="text" class="form-control" placeholder="Username" formControlName="signup_user" required="" />
+            <app-controlmessages [control]="signupForm.controls.signup_user"></app-controlmessages>
+          </div>
+          <div>
+            <input type="email" class="form-control" placeholder="Email" formControlName="signup_email" required="" />
+            <app-controlmessages [control]="signupForm.controls.signup_email"></app-controlmessages>
+          </div>
+          <div>
+            <input type="password" class="form-control" placeholder="Password" formControlName="signup_password" required="" />
+            <app-controlmessages [control]="signupForm.controls.signup_password"></app-controlmessages>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-default submit" [disabled]="!signupForm.valid">Submit</button>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="separator">
+            <p class="change_link">Already a member ?
+              <a href="#signin" class="to_register" (click)="clear()"> Log in </a>
+            </p>
+
+            <div class="clearfix"></div>
+            <br />
+
+            <div>
+              <h1><i class="fa fa-paw"></i> TIXADD</h1>
+              <p>©2016 All Rights Reserved. TIXADD is a Bootstrap 3 template. Privacy and Terms</p>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div >
+    <div  class="animate form fogot_form" *ngIf="isforgot">
+      <section class="login_content">
+        <form [formGroup]="forgotForm" (ngSubmit)="submit_forgot(forgotForm.value)">
+          <h1>Forgot Password</h1>
+            <h5 *ngIf="ismessage"><i class="fa fa-check" aria-hidden="true"></i>
+              {{message}}</h5>
+          <div>
+            <input type="text" class="form-control" placeholder="email" formControlName="forgot_email" required="" />
+            <app-controlmessages [control]="forgotForm.controls.forgot_email"></app-controlmessages>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-default submit" [disabled]="!forgotForm.valid">Submit</button>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="separator">
+            <p class="change_link">Remember Your password ?
+              <a href="#signup" class="to_register" (click)="forgot()"> Signup </a>
+            </p>
+
+            <div class="clearfix"></div>
+            <br />
+
+            <div>
+              <h1><i class="fa fa-paw"></i> TIXADD</h1>
+              <p>©2016 All Rights Reserved. Tixdo! is a Bootstrap 3 template. Privacy and Terms</p>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div >
+
+  </div>
+</div>

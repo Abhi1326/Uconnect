@@ -1,0 +1,41 @@
+<div class="right_col" role="main">
+  <div class="">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2 class="color_text">Daily active users <small>Sessions</small></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div>
+          <div class="x_content">
+            <ul class="list-unstyled msg_list">
+              <li *ngFor="let notify of notify;let i= index">
+                <a (click)="nextpage(notify)">
+                        <span class="image">
+                          <img [src]="host+notify.send_by.image" onerror="this.src='../../assets/images/Blank_woman_placeholder.svg_.png'">
+ </span>
+                  <span>
+                          <span>{{notify.send_by.username|camelCase}}</span>
+                          <span class="time">{{notify.time|amTimeAgo}}</span>
+                        </span>
+                  <span class="message">
+                      {{notify.text}}
+                        </span>
+                  <div *ngIf="notify.type=='registered'">
+                    <button class="btn-register" (click)="confirmRequest(notify,i)">Confirm</button>
+                    <button class="btn-register" (click)="denyRequest(notify,i)">Deny</button>
+                  </div>
+                </a>
+
+              </li>
+              <li *ngIf="ispageValid"  class="load" (click)="loadNotify()"><h4>Load More</h4></li>
+              <li *ngIf="!ispageValid" class="load"><h4>NO More Notification</h4></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

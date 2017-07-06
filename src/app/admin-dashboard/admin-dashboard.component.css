@@ -1,0 +1,26 @@
+
+
+.x_title {
+  border-bottom: 2px solid #E6E9ED;
+  padding: 1px 5px 6px;
+  margin-bottom: 10px; }
+
+
+
+.icon:hover
+{
+  z-index: 9999 !important;
+  color: red;
+}
+
+
+
+.x_panel{
+  padding: 0px;
+}
+
+
+.p_img{
+  width: 80px;
+  height: 80px;
+}

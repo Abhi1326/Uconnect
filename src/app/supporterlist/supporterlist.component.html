@@ -1,0 +1,93 @@
+
+<div class="right_col" role="main">
+  <div class="">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3 class="color_text">Info Cards</h3>
+        </div>
+
+        <div class="title_right">
+          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+
+              <input (keyup)="finding_supporter()" type="text" class="form-control" placeholder="Search for..." [(ngModel)]="search_supporter">
+              <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_title"*ngIf="empid">
+              <h2 >Engineers Team</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link" *ngIf="isSuperuser_slist" (click)="addUser()"><button class="addForm">Add Supporter <i class="fa fa-plus"></i></button></a>
+                </li>
+
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_title"*ngIf="!empid">
+              <h2 >Consultants</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link" *ngIf="isSuperuser_slist" (click)="addUser()"><button class="addForm">Add Consultant <i class="fa fa-plus"></i></button></a>
+                </li>
+
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div id="content" class="x_content">
+              <div class="row" data-columns>
+                <div *ngIf="!nosupp">
+                <div class="profile_details" *ngFor="let data of supporterdata">
+                  <div class="well profile_view">
+                    <div class="col-sm-12">
+                      <h4 *ngIf="empid" class="brief color_text"><i class="color_text">{{data.employee_id||"Employee ID"}}</i></h4>
+                      <h4 *ngIf="!empid" class="brief color_text"><i class="color_text">{{data.client_name||"Client Name"}}</i></h4>
+                      <div class="left col-xs-7 color_text">
+                        <h4 class="color_text">{{data.first_name}}</h4>
+                        <p *ngIf="empid"><b>Skill Set: </b><span class="skill" *ngFor="let skill of data.skillset">{{skill.technology_name}} </span></p>
+                        <p *ngIf="!empid"><strong>Engineer: </strong>{{data._supporter.username}} </p>
+                        <ul class="list-unstyled">
+                          <li><i class="fa fa-envelope-o"></i> {{data.email||"N/A"}} </li>
+                          <li><i class="fa fa-phone"></i> {{data.mobile_no||"N/A"}}</li>
+                        </ul>
+                      </div>
+                      <div class="right col-xs-5 text-center">
+                        <img onerror="this.src='../../assets/images/Blank_woman_placeholder.svg_.png'" [src]="data.image.medium"class="img-circle img-responsive">
+                      </div>
+                    </div>
+                    <div class="col-xs-12 bottom text-center">
+                      <div class="col-xs-12 col-sm-6 emphasis">
+                        <button *ngIf="isSuperuser_slist" (click)="delete_profile(data)" type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
+                        </i> <i class="fa fa-trash"></i> </button>
+                        <button (click)="open_user_profile(data.id)" type="button" class="btn btn-primary btn-xs">
+                          <i class="fa fa-user"> </i> View Profile
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div *ngIf="nosupp">
+                  <p class="no_found">No one found</p>
+                  <span class="no_smile">
+                    :(
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,210 @@
+
+
+<div class="right_col profile_abc" role="main">
+  <div class="">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3 class="color_text pull-left">Project Detail <small  class="color_text"> comments</small></h3>
+          <span class="pull-right">
+            <button id="status" class="btn-primary active" style="padding: 5px;border-radius: 6px 6px" [disabled]="checkPermission()"
+                    (click)="changeStatus()" type="button"> {{consultantdata.status||"change status"}}</button> &emsp;
+            <button  class="btn-success active" style="padding: 5px;border-radius: 6px 6px" type="button" [disabled]="checkPermission()"
+                     (click)="chngProject()"> {{projectdata.status||"change status"}}</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+
+            <div class="x_content">
+
+              <div class="col-md-9 col-sm-9 col-xs-12">
+
+                <ul class="stats-overview">
+                  <li  class="color_text">
+                    <span class="name"> Associated Engineer </span>
+                    <span class="value text-success"> {{supporterprojectdata.username}} </span>
+                  </li>
+                  <li  class="color_text">
+                    <span class="name"> Associated Consultant </span>
+                    <span class="value text-success"> {{consultantdata.username}} </span>
+                  </li>
+                  <li class="hidden-phone color_text">
+                    <span class="name"> Project Name </span>
+                    <span class="value text-success"> {{projectdata.title}} </span>
+                  </li>
+                </ul>
+                <br>
+                <div>
+
+                  <h4  class="color_text">Recent Activity</h4>
+                  <br>
+                  <form id="demo-form" [formGroup]="commentForm"  (ngSubmit)="addComment(commentForm.value)">
+
+                    <label for="message"><h3>Comment</h3>(20 chars min, 100 max) :</label>
+                    <textarea id="message" required="required" class="form-control" name="message"
+                              data-parsley-trigger="keyup" data-parsley-minlength="1" data-parsley-maxlength="100"
+                              data-parsley-minlength-message="Come on! You need to enter at least a 1 caracters long comment.."
+                              data-parsley-validation-threshold="10" formControlName="comment"></textarea>
+                    <br>
+
+                    <button id="post_comment" type="submit" class="btn btn-success">Comment</button>
+
+
+
+                  </form>
+                  <br>
+
+
+                  <!-- end of user messages -->
+                  <ul class="messages">
+                    <li *ngFor="let projectcomment of projectdata.comment">
+                      <img  class="avatar"
+                            [alt]="projectcomment._supporter.username|slice:0:1|uppercase">
+                      <div class="message_date">
+                        <h4 class="date text-info color_text">{{projectcomment.comment_time|date:"shortTime"}}</h4>
+                        <p class="month color_text">{{projectcomment.comment_time|date:"mediumDate"}}</p></div>
+                      <div class="message_wrapper">
+                        <h4 (click)="open_profile_supp(projectcomment._supporter.id)" class="heading color_text">{{projectcomment._supporter.username}}</h4>
+                        <blockquote class="message color_text">{{projectcomment.text}}</blockquote>
+                        <br>
+                      </div>
+                    </li>
+                  </ul>
+                  <!-- end of user messages -->
+
+
+
+                </div>
+
+
+              </div>
+
+              <!-- start project-detail sidebar -->
+              <div class="col-md-3 col-sm-3 col-xs-12">
+
+                <section class="panel">
+
+                  <div class="x_title">
+                    <h2 class="color_text">Project Description</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="panel-body">
+                    <h3 class="green color_text"><i class="fa fa-paint-brush"></i> {{projectdata.title}}</h3>
+
+                    <p class="color_text">{{projectdata.description}}</p>
+                    <br>
+
+                    <div class="project_detail">
+
+                      <p class="title color_text">Client Company</p>
+                      <p class="color_text">{{consultantdata.company_name|uppercase}}</p>
+                      <p class="title color_text">Consultant Name</p>
+                      <p class="color_text">{{consultantdata.username}}</p>
+                    </div>
+
+                    <br>
+                    <h5 class="color_text">Files</h5>
+                    <ul class="list-unstyled project_files">
+                      <li class="color_text" *ngFor="let file of projectdata.file"><a [href]="file.file" ><i class="fa fa-file-word-o"></i>{{file.file|slice:37:file.file.length}}</a>
+                      </li>
+                    </ul>
+                    <br>
+
+                    <div class="text-center mtop20" *ngIf="((isSuper_pdetail)||(supporterprojectdata.id==user.id))">
+                      <a class="color_text" (click)="addFiles()"  class="btn btn-sm btn-primary">Add files</a>
+                      <button class="color_text" type="button"  class="btn btn-primary" (click)="chngProject()" href="#" class="btn btn-sm btn-warning">Edit</button>
+                    </div>
+                  </div>
+
+                </section>
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="projectModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel2">status</h4>
+      </div>
+      <div class="modal-body">
+
+          <div class="item form-group" style="position: relative;top: 6px;">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Status <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select class="form-control"  [(ngModel)]="status" required>
+                <option value="going_on">Going On</option>
+                <option value="project_completed">Project Completed</option>
+                <option value="contract_completed">Contract Completed</option>
+                <option value="contract_extended">Contract Extended</option>
+                <option value="resigned">Resigned</option>
+                <option value="fired">Fired</option>
+              </select>
+            </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" (click)="updateStatus()" class="btn btn-primary" data-dismiss="modal">update</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="editfile" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <app-fileuploader (updatedData)="updatedData($event)" [projectdata]="projectdata"> </app-fileuploader>
+    </div>
+  </div>
+</div>
+
+<div id="statusModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">consultant status</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="item form-group" style="  position: relative;top: 6px;">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Status <span class="required">*</span></label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <select class="form-control"  [(ngModel)]="consultant_status" required>
+              <option value="active">Active</option>
+              <option value="less_active">Less Active</option>
+              <option value="independent">Independent</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" (click)="updateConsultantStatus(consultantdata.id)" class="btn btn-primary" data-dismiss="modal">update</button>
+      </div>
+
+    </div>
+  </div>
+</div>

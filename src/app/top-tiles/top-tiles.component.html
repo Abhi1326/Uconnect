@@ -1,0 +1,34 @@
+<div class="row top_tiles">
+  <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    <div class="tile-stats">
+      <div *ngIf="isSuperuser_admin" class="icon anchor" (click)="form('supporter')"><i
+        class="fa fa-plus-circle"></i></div>
+      <div class="anchor" (click)="formlist('supporterlist')">
+        <div class="count">{{alldata.no_of_supporters}}</div>
+        <h3>Engineers</h3>
+        <p class="color_text">List Of Engineers</p>
+      </div>
+    </div>
+  </div>
+  <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon anchor" *ngIf="isSuperuser_admin" (click)="form('consultant')"><i
+        class="fa fa-plus-circle"></i></div>
+      <div class="anchor" (click)="formlist('consultantlist')">
+        <div class="count">{{alldata.no_of_consultant}}</div>
+        <h3>Consultants</h3>
+        <p class="color_text">List Of Consultants</p>
+      </div>
+    </div>
+  </div>
+  <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon anchor" (click)="form('project')"><i class="fa fa-plus-circle"></i></div>
+      <div class="anchor" (click)="formlist('projectlist')">
+        <div class="count">{{alldata.no_of_projects}}</div>
+        <h3>Projects</h3>
+        <p class="color_text">List Of Projects</p>
+      </div>
+    </div>
+  </div>
+</div>

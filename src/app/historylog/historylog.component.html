@@ -1,0 +1,92 @@
+
+<div class="modal-header">
+  <button type="button" class="close" (click)="closeHistory()"><span aria-hidden="true">×</span>
+  </button>
+
+  <h4 class="modal-title" id="myModalLabel">{{projectData.title}} History   <small>  <span class="pull-right"><button  class="top-btn  btn btn-primary" (click)="exportToExcel()">Export To Excel</button></span></small></h4>
+
+</div>
+  <div class="modal-body">
+    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+      <ul id="myTab" class="nav nav-tabs bar_tabs color_text" role="tablist">
+        <li role="presentation" class="active"><a href="#tab_content01" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Change Log</a>
+        </li>
+        <li role="presentation" (click)="openCharts()" class=""><a href="#tab_content02" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Analysis</a>
+        </li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade active in" id="tab_content01" aria-labelledby="home-tab" >
+          <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12" *ngFor="let supporterArray of projectData.consultant_history.supporter_id;let k=index">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>{{supporterArray.supporter_id}} <small>assigned on {{supporterArray.supporter_change_time|date:"mediumDate"}}</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li class="pull-right"><a id="collapse-link{{k}}" class="collapse-link" (click)="hide_content($event)"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div id="x_content{{k}}" class="x_content">
+          <table class="data table table-striped no-margin" >
+            <caption style="display: none"><h3>{{supporterArray.supporter_id}} <small>assigned on {{supporterArray.supporter_change_time|date:"mediumDate"}}</small></h3></caption>
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Change Date</th>
+              <th>Change Time</th>
+              <th>Duration</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of supporterArray.history;let i=index;" >
+              <td>{{i+1}}</td>
+              <td>{{data.completion_date|date:"mediumDate"}}</td>
+              <td>{{data.completion_date|date:"shortTime"}}</td>
+              <td >
+                <span *ngIf="calculateDuration(i,k)">
+                  <span *ngFor="let l of cache|key;let j=index">
+
+
+                    <span *ngIf="!(l.key=='status')">
+                              {{l.value}} {{l.key}}
+
+                    </span>
+                  </span>
+
+                  </span>
+
+              </td>
+              <!--<td>{{Array_of_duration[k]|json}}</td>-->
+              <td>{{data.status||"Status Not Set"}}</td>
+            </tr>
+            </tbody>
+
+          </table>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+        <div   role="tabpanel" class="tab-pane fade color_text" id="tab_content02" aria-labelledby="profile-tab">
+          <div *ngIf="ischarts" >
+          <div class="row">
+
+            <div class="col-sm-6 col-md-6 col-xs-12"  *ngFor="let chart of charts;let i=index">
+              <app-statistical-chart  [charts]="chart" [supporter_details]="projectData.consultant_history.supporter_id[i]"></app-statistical-chart>
+            </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- end user projects -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+  </div>
+

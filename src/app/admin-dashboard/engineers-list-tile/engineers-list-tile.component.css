@@ -1,0 +1,27 @@
+
+.img-circle{
+  height: 80px;
+  width:80px;
+}
+.x_content{
+  height: 320px;
+  overflow-y: auto;
+}
+.img-circle{
+  height: 80px;
+  width:80px;
+}
+table>tbody>tr>td{
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: middle;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+.list_img{
+  min-height: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+  min-width: 50px;
+  max-width: 50px;
+}
